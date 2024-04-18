@@ -6,8 +6,6 @@ public class Item {
 	private String nome;
 	private float preco;
 	private int quantidade;
-	private int id_categoria;
-//	private Categoria categoria;
 	
 	
 	public Integer getId() {
@@ -31,28 +29,9 @@ public class Item {
 	public int getQuantidade() {
 		return quantidade;
 	}
-	
-	public void addQuantidade(int quantidade) {
-		this.quantidade += quantidade;
+	public void setQuantidade(int quantidade) {
+		this.quantidade = quantidade;
 	}
-	
-	public void removeQuantidade(int quantidade) {
-		this.quantidade -= quantidade;
-	}
-//	public Categoria getCategoria() {
-//		return categoria;
-//	}
-//	public void setCategoria(Categoria categoria) {
-//		this.categoria = categoria;
-//	}
-	public int getId_categoria() {
-		return id_categoria;
-	}
-	public void setId_categoria(int id_categoria) {
-		this.id_categoria = id_categoria;
-	}
-	
-	
 	
 	
 }

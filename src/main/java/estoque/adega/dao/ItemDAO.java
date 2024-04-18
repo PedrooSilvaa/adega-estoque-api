@@ -11,9 +11,9 @@ import estoque.adega.model.Item;
 
 public class ItemDAO {
 
-	private final String SQLSELECT = "SELECT id, nome, preco, quantidade, id_categoria FROM item";
+	private final String SQLSELECT = "SELECT id, nome, preco, quantidade FROM item";
 	
-	private final String SQLINSERT = "SELECT nome = ?, preco = ?, quantidade = ?, id_categoria = ? FROM item";
+	private final String SQLINSERT = "INSERT INTO ITEM (nome, preco, quantidade) VALUES(?, ?, ?)";
 	
 	
 	public int novo(Item item) {
@@ -21,35 +21,21 @@ public class ItemDAO {
 		try {
 			con = dao.conexao();
 			
-			con.setAutoCommit(false);
-			
 			if (!con.isClosed()) {
 				PreparedStatement ps = con.prepareStatement(SQLINSERT);
 				
 				ps.setString(1, item.getNome());
 				ps.setFloat(2, item.getPreco());
 				ps.setInt(3, item.getQuantidade());
-				ps.setInt(4, item.getId_categoria());
 				
 				ps.execute();
 			}
 			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			try {
-				con.rollback();
-				
-			} catch (SQLException e1) {
- 
-			}
-		}finally {
-			try {
-				con.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 		}
+		
+	
 		return item.getId();
 		
 	}
@@ -74,7 +60,7 @@ public class ItemDAO {
 					tmp.setId(rs.getInt("id"));
 					tmp.setNome(rs.getString("nome"));
 					tmp.setPreco(rs.getFloat("preco"));
-					tmp.setId_categoria(rs.getInt("id_categoria"));
+					tmp.setQuantidade(rs.getInt("quantidade"));
 					
 					itens.add(tmp);
 				}
